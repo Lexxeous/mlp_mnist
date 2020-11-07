@@ -1,9 +1,9 @@
-#mlp_mnist:
+# mlp_mnist:
 
-###Purpose:
+### Purpose:
 The purpose of this repository is to experiment with the modification of stochastic gradient decent parameters to better understand the effects on training and testing accuracy.
 
-###Usage:
+### Usage:
 Use `results.csv` to log the results of experimental runs.
 
 The `AUTO_RUN` global variable specifies if the `mlp_mnist.py` script automatically logs the relevant data or not.<br>
@@ -19,7 +19,7 @@ The `AUTO_RUN` global variable specifies if the `mlp_mnist.py` script automatica
   * `HIDDEN_DIM` represents the hidden layer dimension size. Default is "50".<br>
   * `NUM_LAYERS` represents the number of dense hidden layers. Manually add another layer if you change this value. Default value is "3".<br>
 
-###References:
+### References:
 
 MNIST datasets downloaded from:<br>
 http://yann.lecun.com/exdb/mnist/
