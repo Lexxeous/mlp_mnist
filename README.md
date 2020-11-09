@@ -22,7 +22,7 @@ The `AUTO_RUN` global variable specifies if the `mlp_mnist.py` script automatica
 ### Setting up the python environment:
 There is a `requirements.txt` file that contains specific versions of libraries used by mlp_mnist.  After checking out this repository, run
 `python3 -m venv venv` to create a local python environment directory named `venv`, followed by `venv/bin/pip install -r requirements.txt` to
-populate it with required python modules.  To load the `venv` python environment, you should run `./venv/bin/activate`.
+populate it with required python modules.  To load the `venv` python environment, you should run `source ./venv/bin/activate`.
 
 ### References:
 
