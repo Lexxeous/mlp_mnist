@@ -19,6 +19,11 @@ The `AUTO_RUN` global variable specifies if the `mlp_mnist.py` script automatica
   * `HIDDEN_DIM` represents the hidden layer dimension size. Default is "50".<br>
   * `NUM_LAYERS` represents the number of dense hidden layers. Manually add another layer if you change this value. Default value is "3".<br>
 
+### Setting up the python environment:
+There is a `requirements.txt` file that contains specific versions of libraries used by mlp_mnist.  After checking out this repository, run
+`python3 -m venv venv` to create a local python environment directory named `venv`, followed by `venv/bin/pip install -r requirements.txt` to
+populate it with required python modules.  To load the `venv` python environment, you should run `./venv/bin/activate`.
+
 ### References:
 
 MNIST datasets downloaded from:<br>
