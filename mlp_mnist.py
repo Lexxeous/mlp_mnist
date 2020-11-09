@@ -8,7 +8,8 @@ import os
 import sys
 import struct
 import matplotlib.pyplot as plt
-import tensorflow.contrib.keras as keras
+import keras
+#import tensorflow.contrib.keras as keras
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––– GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––– #
 
@@ -26,8 +27,8 @@ HIDDEN_DIM = 50
 NUM_LAYERS = 3
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––– DEFINE FUNCTIONS –––––––––––––––––––––––––––––––––––––––––––––––– #
- 
- 
+
+
 def load_mnist(path, kind='train'):
 	"""
 	Load MNIST data from `path`
@@ -39,16 +40,16 @@ def load_mnist(path, kind='train'):
 
 	labels_path = os.path.join(path, f'{kind}-labels-idx1-ubyte')
 	images_path = os.path.join(path, f'{kind}-images-idx3-ubyte')
-		
+
 	with open(labels_path, 'rb') as lbpath:
 		magic, n = struct.unpack('>II', lbpath.read(8))
 		labels = np.fromfile(lbpath, dtype=np.uint8)
- 
+
 	with open(images_path, 'rb') as imgpath:
 		magic, num, rows, cols = struct.unpack(">IIII", imgpath.read(16))
 		images = np.fromfile(imgpath, dtype=np.uint8).reshape(len(labels), 784)
 		images = ((images / 255.) - .5) * 2
- 
+
 	return images, labels
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––– MAIN FUNCTION –––––––––––––––––––––––––––––––––––––––––––––––––– #
@@ -89,7 +90,8 @@ def main():
 
 
 	np.random.seed(123)
-	tf.set_random_seed(123)
+	tf.random.set_seed(123)
+	#tf.set_random_seed(123)
 
 
 	y_train_onehot = keras.utils.to_categorical(y_train)
@@ -107,7 +109,7 @@ def main():
 		units=HIDDEN_DIM, # output dimension
 		kernel_initializer='glorot_uniform',
 		bias_initializer='zeros',
-		activation='tanh') 
+		activation='tanh')
 	)
 
 	# add hidden layer
@@ -169,5 +171,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-
