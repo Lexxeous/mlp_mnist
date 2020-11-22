@@ -7,24 +7,26 @@ import numpy as np
 import os
 import sys
 import struct
-import matplotlib.pyplot as plt
+# import random
+# import matplotlib.pyplot as plt
 import keras
 #import tensorflow.contrib.keras as keras
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––– GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––– #
 
-AUTO_LOG = True
+global AUTO_LOG, LR, DECAY, MOMENTUM, NESTEROV, EPOCHS, BATCH_SZ, HIDDEN_DIM, NUM_LAYERS, MIN_LAYERS
 
-TR_ACC = None
-TE_ACC = None
-LR = 1
-DECAY = 1
-MOMENTUM = 1
-NESTEROV = False
-EPOCHS = 50
-BATCH_SZ = 64
-HIDDEN_DIM = 50
-NUM_LAYERS = 3
+AUTO_LOG = int(sys.argv[1])
+LR = float(sys.argv[2])
+DECAY = float(sys.argv[3])
+MOMENTUM = float(sys.argv[4])
+NESTEROV = sys.argv[5]
+EPOCHS = int(sys.argv[6])
+BATCH_SZ = int(sys.argv[7])
+HIDDEN_DIM = int(sys.argv[8])
+NUM_LAYERS = int(sys.argv[9])
+
+MIN_LAYERS = 3 # don't change this unless you have to
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––– DEFINE FUNCTIONS –––––––––––––––––––––––––––––––––––––––––––––––– #
 
@@ -76,6 +78,8 @@ def main():
 	print(X_train_centered.shape, y_train.shape)
 	print(X_test_centered.shape, y_test.shape)
 
+	# –––––––––––––––––––––––––––––– OPTIONAL PLOTTING ––––––––––––––––––––––––––––––
+
 	# Show plot of some digit data
 	# fig, ax = plt.subplots(nrows=2, ncols=5, sharex=True, sharey=True)
 	# ax = ax.flatten()
@@ -88,10 +92,12 @@ def main():
 	# plt.tight_layout()
 	# plt.show()
 
+	# –––––––––––––––––––––––––––––– OPTIONAL SEEDING ––––––––––––––––––––––––––––––
 
-	np.random.seed(123)
-	tf.random.set_seed(123)
-	#tf.set_random_seed(123)
+	# rand_int = random.randint(0, 1e6)
+	# np.random.seed(123)
+	# tf.random.set_seed(123)
+	# tf.set_random_seed(123)
 
 
 	y_train_onehot = keras.utils.to_categorical(y_train)
@@ -114,6 +120,17 @@ def main():
 
 	# add hidden layer
 	model.add(
+		keras.layers.Dense(
+			input_dim=HIDDEN_DIM,
+			units=HIDDEN_DIM, # output dimension
+			kernel_initializer='glorot_uniform',
+			bias_initializer='zeros',
+			activation='tanh')
+		)
+
+	for layer in range(MIN_LAYERS, int(sys.argv[9])):
+		# add hidden layer
+		model.add(
 		keras.layers.Dense(
 			input_dim=HIDDEN_DIM,
 			units=HIDDEN_DIM, # output dimension

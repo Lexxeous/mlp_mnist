@@ -6,10 +6,13 @@ The purpose of this repository is to experiment with the modification of stochas
 ### Usage:
 Use `results.csv` to log the results of experimental runs.
 
-The `AUTO_RUN` global variable specifies if the `mlp_mnist.py` script automatically logs the relevant data or not.<br>
+  
+
 **Only modify the parameters that are specified:**<br>
-  * `TR_ACC` represents the training accuracy metric. This will be calculated automatically. Default value is "None".<br>
-  * `TE_ACC` represents the testing accuracy metric. This will be calculated automatically. Default value is "None".<br>
+
+> All of the following parameters can be used as command line arguments to the `mlp_mnist.py` script from argument 1 to argument 9.
+
+  * `AUTO_RUN` represents automatically logging data from `mlp_mnist.py` or not. Default value is "1".<br>
   * `LR` represents represents the learning rate metric. Default value is "0.001".<br>
   * `DECAY` represents the decay metric. Default value is "1e-7".<br>
   * `MOMENTUM` represents the momentum metric. Default value is "0.9".<br>
