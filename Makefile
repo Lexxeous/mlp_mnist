@@ -1,11 +1,20 @@
+# default is 1
 AUTO_LOG?=1
+# default is 0.001
 LR?=0.001
+# default is 0.0000001
 DECAY?=0.0000001
+# default is 0.9
 MOMENTUM?=0.9
+# default is False
 NESTEROV?=False
-EPOCHS?=50
+# default is 50
+EPOCHS?=3
+# default is 50
 BATCH_SZ?=50
+# default is 50
 HIDDEN_DIM?=50
+# default is 3
 NUM_LAYERS?=3
 
 

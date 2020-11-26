@@ -7,14 +7,9 @@ import numpy as np
 import os
 import sys
 import struct
-# import random
-# import matplotlib.pyplot as plt
 import keras
-#import tensorflow.contrib.keras as keras
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––– GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––– #
-
-global AUTO_LOG, LR, DECAY, MOMENTUM, NESTEROV, EPOCHS, BATCH_SZ, HIDDEN_DIM, NUM_LAYERS, MIN_LAYERS
 
 AUTO_LOG = int(sys.argv[1])
 LR = float(sys.argv[2])
@@ -57,6 +52,8 @@ def load_mnist(path, kind='train'):
 # –––––––––––––––––––––––––––––––––––––––––––––––––– MAIN FUNCTION –––––––––––––––––––––––––––––––––––––––––––––––––– #
 
 def main():
+	tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR) # suppress tensorflow warnings about depreciations
+
 	# Loading the datasets
 	X_train, y_train = load_mnist('./datasets/', kind='train')
 	print(f'Rows: {X_train.shape[0]},  Columns: {X_train.shape[1]}')
@@ -149,6 +146,9 @@ def main():
 			activation='softmax')
 		)
 
+	print(model.summary())
+	param_count = model.count_params()
+
 	NUM_LAYERS = len(model.layers)
 
 	# define SGD optimizer
@@ -182,7 +182,7 @@ def main():
 
 	if(AUTO_LOG):
 		with open("results.csv", 'a') as res:
-			print(f"{str(round(train_acc, 4))},{str(round(test_acc, 4))},{LR},{DECAY},{MOMENTUM},{NESTEROV},{EPOCHS},{BATCH_SZ},{HIDDEN_DIM},{NUM_LAYERS}", file=res)
+			print(f"{str(round(train_acc, 4))},{str(round(test_acc, 4))},{LR},{DECAY},{MOMENTUM},{NESTEROV},{EPOCHS},{BATCH_SZ},{HIDDEN_DIM},{NUM_LAYERS},{param_count}", file=res)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––– MAIN GUARD –––––––––––––––––––––––––––––––––––––––––––––––––––– #
 
