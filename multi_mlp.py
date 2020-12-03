@@ -17,9 +17,9 @@ def calc_iters(start, end, step):
 AUTO_LOG = 1
 
 LR = 0.001
-LR_start = 0.000
-LR_end = 0.010
-LR_step = 0.001
+LR_start = 0.010
+LR_end = 1.010
+LR_step = 0.050
 LR_arr = [LR_start, LR_end, LR_step]
 LR_iters = calc_iters(LR_start, LR_end, LR_step)
 
@@ -31,9 +31,9 @@ DECAY_arr = [DECAY_start, DECAY_end, DECAY_step]
 DECAY_iters = calc_iters(DECAY_start, DECAY_end, DECAY_step)
 
 MOMENTUM = 0.9
-MOMENTUM_start = 0.0
-MOMENTUM_end = 1.0
-MOMENTUM_step = 0.1
+MOMENTUM_start = 0.010
+MOMENTUM_end = 1.010
+MOMENTUM_step = 0.050
 MOMENTUM_arr = [MOMENTUM_start, MOMENTUM_end, MOMENTUM_step]
 MOMENTUM_iters = calc_iters(MOMENTUM_start, MOMENTUM_end, MOMENTUM_step)
 
@@ -81,6 +81,8 @@ def main():
 		# capture the total number of iterations for that parameter with equation: (end+step-start)/step
 		# add to total that the print about run count will say: finished run count 4 of 2000
 
+		# could add an array or True/False to determine which str(_val) values to use otherwise use the "<default_val>"
+
 	run_count = 1
 	for lr_val in np.arange(LR_arr[0], LR_arr[1], LR_arr[2]):
 		for decay_val in np.arange(DECAY_arr[0], DECAY_arr[1], DECAY_arr[2]):
@@ -88,7 +90,7 @@ def main():
 				for nesterov_val in NESTEROV_arr:
 					for epochs_val in np.arange(EPOCHS_arr[0], EPOCHS_arr[1], EPOCHS_arr[2]):
 						for batch_sz_val in np.arange(BATCH_SZ_arr[0], BATCH_SZ_arr[1], BATCH_SZ_arr[2]):
-							for hiddem_dim_val in np.arange(HIDDEN_DIM_arr[0], HIDDEN_DIM_arr[1], HIDDEN_DIM_arr[2]):
+							for hidden_dim_val in np.arange(HIDDEN_DIM_arr[0], HIDDEN_DIM_arr[1], HIDDEN_DIM_arr[2]):
 								for num_layers_val in np.arange(NUM_LAYERS_arr[0], NUM_LAYERS_arr[1], NUM_LAYERS_arr[2]):
 									subprocess.run(["python3",
 																	"mlp_mnist.py",
@@ -99,15 +101,16 @@ def main():
 																	str(nesterov_val), # NESTEROV
 																	str(epochs_val), # EPOCHS
 																	str(batch_sz_val), # BATCH_SZ
-																	str(hiddem_dim_val), # HIDDEN_DIM
+																	str(hidden_dim_val), # HIDDEN_DIM
 																	str(num_layers_val)], # NUM_LAYERS
 																	capture_output=False, stdout=subprocess.DEVNULL)
 									print("\nFinished run count", str(run_count), "out of", str(TOTAL_iters) + "\n", file=sys.stdout)
 									run_count = run_count + 1
-									gc.collect()
+									if(run_count % 100 == 0): gc.collect()
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––– MAIN GUARD –––––––––––––––––––––––––––––––––––––––––––––––––––– #
 
 if __name__ == "__main__":
 	main()
+

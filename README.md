@@ -6,8 +6,6 @@ The purpose of this repository is to experiment with the modification of stochas
 ### Usage:
 Use `results.csv` to log the results of experimental runs.
 
-  
-
 **Only modify the parameters that are specified:**<br>
 
 > All of the following parameters can be used as command line arguments to the `mlp_mnist.py` script from argument 1 to argument 9.

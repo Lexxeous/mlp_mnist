@@ -9,7 +9,7 @@ MOMENTUM?=0.9
 # default is False
 NESTEROV?=False
 # default is 50
-EPOCHS?=3
+EPOCHS?=50
 # default is 50
 BATCH_SZ?=50
 # default is 50
