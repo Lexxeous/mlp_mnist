@@ -35,8 +35,8 @@ def load_mnist(path, kind='train'):
 		"gzip -d *ubyte.gz"
 	"""
 
-	labels_path = os.path.join(path, f'{kind}-labels-idx1-ubyte')
-	images_path = os.path.join(path, f'{kind}-images-idx3-ubyte')
+	labels_path = os.path.join(path, f'{kind}-labels')
+	images_path = os.path.join(path, f'{kind}-images')
 
 	with open(labels_path, 'rb') as lbpath:
 		magic, n = struct.unpack('>II', lbpath.read(8))

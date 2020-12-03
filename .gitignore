@@ -1,5 +1,3 @@
-results.csv
-*.csv
 venv
 test.py
 todo.txt

@@ -21,7 +21,6 @@ NUM_LAYERS?=3
 run:
 	python3 multi_mlp.py
 
-
 single:
 	python3 mlp_mnist.py $(AUTO_LOG) $(LR) $(DECAY) $(MOMENTUM) $(NESTEROV) $(EPOCHS) $(BATCH_SZ) $(HIDDEN_DIM) $(NUM_LAYERS)
 
